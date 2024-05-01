@@ -37,10 +37,10 @@ node n2 {
 	hostname n2
 	!
 	interface eth1
-	 ip address 10.0.3.1/24
+	 ip address 10.3.63.3/23
 	!
 	interface eth0
-	 ip address 10.0.0.2/24
+	 ip address 10.3.63.2/23
 	!
     }
     canvas c1
@@ -58,10 +58,10 @@ node n3 {
 	hostname n3
 	!
 	interface eth1
-	 ip address 10.0.4.1/24
+	 ip address 10.3.128.1/23
 	!
 	interface eth0
-	 ip address 10.0.1.2/24
+	 ip address 10.3.63.240/23
 	!
     }
     canvas c1
@@ -78,14 +78,14 @@ node n4 {
     network-config {
 	hostname n4
 	!
-	interface eth2
-	 ip address 10.0.5.1/24
-	!
 	interface eth1
-	 ip address 10.0.4.2/24
+	 ip address 10.3.128.2/23
+	!
+	interface eth2
+	 ip address 10.3.127.4/23
 	!
 	interface eth0
-	 ip address 10.0.3.2/24
+	 ip address 10.3.63.100/23
 	!
     }
     canvas c1
@@ -105,8 +105,8 @@ node n6 {
 	!
     }
     canvas c1
-    iconcoords {470.0 142.0}
-    labelcoords {470.0 174.0}
+    iconcoords {474.6666666666667 149.33333333333334}
+    labelcoords {474.6666666666667 181.33333333333334}
     custom-image /usr/local/share/core/icons/normal/antenna.gif
 }
 
@@ -118,8 +118,8 @@ node n7 {
 	!
     }
     canvas c1
-    iconcoords {501.0 143.0}
-    labelcoords {501.0 175.0}
+    iconcoords {497.0 149.0}
+    labelcoords {497.0 181.0}
     custom-image /usr/local/share/core/icons/normal/antenna.gif
 }
 
@@ -176,8 +176,8 @@ node n10 {
 	!
     }
     canvas c1
-    iconcoords {416.0 544.0}
-    labelcoords {416.0 568.0}
+    iconcoords {419.0 520.0}
+    labelcoords {419.0 544.0}
     interface-peer {e0 n4}
     interface-peer {e1 n13}
     interface-peer {e2 n14}
@@ -191,12 +191,12 @@ node n11 {
 	hostname n11
 	!
 	interface eth0
-	 ip address 10.0.4.10/24
+	 ip address 10.3.128.10/23
 	!
     }
     canvas c1
-    iconcoords {553.0 346.0}
-    labelcoords {553.0 378.0}
+    iconcoords {612.0 319.0}
+    labelcoords {612.0 351.0}
     interface-peer {eth0 n9}
     services {DefaultRoute UserDefined}
 }
@@ -208,12 +208,12 @@ node n12 {
 	hostname n12
 	!
 	interface eth0
-	 ip address 10.0.4.11/24
+	 ip address 10.3.128.11/23
 	!
     }
     canvas c1
-    iconcoords {597.0 408.0}
-    labelcoords {597.0 440.0}
+    iconcoords {606.0 417.0}
+    labelcoords {606.0 449.0}
     interface-peer {eth0 n9}
     services {DefaultRoute UserDefined}
 }
@@ -224,24 +224,22 @@ node n13 {
     network-config {
 	hostname n13
 	!
-	interface eth2
-	 ip address 10.0.10.1/24
+	interface eth1
+	 ip address 10.3.0.1/24
 	!
 	interface eth3
-	 ip address 10.0.11.1/24
-	 ipv6 address 2001:6::1/64
+	 ip address 10.3.0.3/24
 	!
-	interface eth1
-	 ip address 10.0.9.1/24
-	 ipv6 address 2001:4::1/64
+	interface eth2
+	 ip address 10.3.0.2/24
 	!
 	interface eth0
-	 ip address 10.0.5.2/24
+	 ip address 10.3.63.4/23
 	!
     }
     canvas c1
-    iconcoords {95.0 576.0}
-    labelcoords {95.0 608.0}
+    iconcoords {121.0 533.0}
+    labelcoords {121.0 565.0}
     interface-peer {eth0 n10}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
     interface-peer {eth1 n17}
@@ -255,24 +253,22 @@ node n14 {
     network-config {
 	hostname n14
 	!
-	interface eth2
-	 ip address 10.0.8.1/24
-	!
 	interface eth3
-	 ip address 10.0.12.1/24
-	 ipv6 address 2001:7::1/64
+	 ip address 10.3.32.3/24
+	!
+	interface eth2
+	 ip address 10.3.32.2/24
 	!
 	interface eth1
-	 ip address 10.0.7.1/24
-	 ipv6 address 2001:2::1/64
+	 ip address 10.3.32.1/24
 	!
 	interface eth0
-	 ip address 10.0.5.3/24
+	 ip address 10.3.63.5/23
 	!
     }
     canvas c1
-    iconcoords {405.0 621.0}
-    labelcoords {405.0 653.0}
+    iconcoords {389.0 575.0}
+    labelcoords {389.0 607.0}
     interface-peer {eth0 n10}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
     interface-peer {eth1 n19}
@@ -287,14 +283,13 @@ node n15 {
 	hostname n15
 	!
 	interface eth1
-	 ip address 10.0.2.1/24
-	 ipv6 address 2001:0::1/64
+	 ip address 10.3.191.1/23
 	!
 	interface eth2
-	 ip address 10.0.6.1/24
+	 ip address 10.3.191.2/23
 	!
 	interface eth0
-	 ip address 10.0.5.4/24
+	 ip address 10.3.63.6/23
 	!
     }
     canvas c1
@@ -313,8 +308,8 @@ node n16 {
 	!
     }
     canvas c1
-    iconcoords {42.0 645.0}
-    labelcoords {42.0 669.0}
+    iconcoords {32.0 597.0}
+    labelcoords {32.0 621.0}
     interface-peer {e0 n13}
     interface-peer {e1 n24}
     interface-peer {e2 n25}
@@ -327,8 +322,8 @@ node n17 {
 	!
     }
     canvas c1
-    iconcoords {192.0 628.0}
-    labelcoords {192.0 652.0}
+    iconcoords {210.0 619.0}
+    labelcoords {210.0 643.0}
     interface-peer {e0 n13}
     interface-peer {e1 n29}
 }
@@ -343,6 +338,7 @@ node n18 {
     iconcoords {342.0 677.0}
     labelcoords {342.0 701.0}
     interface-peer {e0 n14}
+    interface-peer {e1 n28}
 }
 
 node n19 {
@@ -365,8 +361,8 @@ node n20 {
 	!
     }
     canvas c1
-    iconcoords {706.0 635.0}
-    labelcoords {706.0 659.0}
+    iconcoords {670.0 587.0}
+    labelcoords {670.0 611.0}
     interface-peer {e0 n15}
     interface-peer {e1 n36}
     interface-peer {e2 n37}
@@ -392,7 +388,7 @@ node n23 {
 	hostname n23
 	!
 	interface eth0
-	 ip address 10.0.2.2/24
+	 ip address 10.3.191.5/23
 	!
     }
     canvas c1
@@ -409,14 +405,14 @@ node n24 {
 	hostname n24
 	!
 	interface eth0
-	 ip address 10.0.10.20/24
-	 ipv6 address 2001:5::20/64
+	 ip address 10.3.0.7/24
 	!
     }
     canvas c1
     iconcoords {16.0 703.0}
     labelcoords {16.0 735.0}
     interface-peer {eth0 n16}
+    services {DefaultRoute UserDefined}
 }
 
 node n25 {
@@ -426,14 +422,14 @@ node n25 {
 	hostname n25
 	!
 	interface eth0
-	 ip address 10.0.10.21/24
-	 ipv6 address 2001:5::21/64
+	 ip address 10.3.0.6/24
 	!
     }
     canvas c1
-    iconcoords {77.0 704.0}
-    labelcoords {77.0 736.0}
+    iconcoords {99.0 668.0}
+    labelcoords {99.0 700.0}
     interface-peer {eth0 n16}
+    services {DefaultRoute UserDefined}
 }
 
 node n26 {
@@ -444,8 +440,9 @@ node n26 {
 	!
     }
     canvas c1
-    iconcoords {158.0 698.0}
-    labelcoords {158.0 730.0}
+    iconcoords {163.0 710.0}
+    labelcoords {163.0 742.0}
+    services {DefaultRoute UserDefined}
 }
 
 node n27 {
@@ -456,8 +453,8 @@ node n27 {
 	!
     }
     canvas c1
-    iconcoords {220.0 681.0}
-    labelcoords {220.0 713.0}
+    iconcoords {235.0 710.0}
+    labelcoords {235.0 742.0}
 }
 
 node n28 {
@@ -466,10 +463,15 @@ node n28 {
     network-config {
 	hostname n28
 	!
+	interface eth0
+	 ip address 10.3.32.20/24
+	 ipv6 address 2001:0::20/64
+	!
     }
     canvas c1
-    iconcoords {335.0 714.0}
-    labelcoords {335.0 746.0}
+    iconcoords {317.3333333333333 718.0}
+    labelcoords {317.3333333333333 750.0}
+    interface-peer {eth0 n18}
 }
 
 node n29 {
@@ -479,14 +481,14 @@ node n29 {
 	hostname n29
 	!
 	interface eth0
-	 ip address 10.0.9.10/24
-	 ipv6 address 2001:4::10/64
+	 ip address 10.3.0.4/24
 	!
     }
     canvas c1
-    iconcoords {247.0 608.0}
-    labelcoords {247.0 640.0}
+    iconcoords {285.0 563.0}
+    labelcoords {285.0 595.0}
     interface-peer {eth0 n17}
+    services {DefaultRoute UserDefined}
 }
 
 node n31 {
@@ -509,12 +511,12 @@ node n32 {
 	hostname n32
 	!
 	interface eth0
-	 ip address 10.0.11.2/24
+	 ip address 10.3.0.8/24
 	!
     }
     canvas c1
-    iconcoords {137.0 660.0}
-    labelcoords {137.0 692.0}
+    iconcoords {134.0 658.0}
+    labelcoords {134.0 690.0}
     interface-peer {eth0 n13}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
@@ -575,14 +577,14 @@ node n36 {
 	hostname n36
 	!
 	interface eth0
-	 ip address 10.0.6.20/24
-	 ipv6 address 2001:1::20/64
+	 ip address 10.3.191.3/23
 	!
     }
     canvas c1
     iconcoords {612.0 645.0}
     labelcoords {612.0 677.0}
     interface-peer {eth0 n20}
+    services {DefaultRoute UserDefined}
 }
 
 node n37 {
@@ -592,14 +594,14 @@ node n37 {
 	hostname n37
 	!
 	interface eth0
-	 ip address 10.0.6.21/24
-	 ipv6 address 2001:1::21/64
+	 ip address 10.3.191.4/23
 	!
     }
     canvas c1
     iconcoords {702.0 693.0}
     labelcoords {702.0 725.0}
     interface-peer {eth0 n20}
+    services {DefaultRoute UserDefined}
 }
 
 node n38 {
@@ -609,14 +611,14 @@ node n38 {
 	hostname n38
 	!
 	interface eth0
-	 ip address 10.0.7.20/24
-	 ipv6 address 2001:2::20/64
+	 ip address 10.3.32.5/24
 	!
     }
     canvas c1
     iconcoords {501.0 710.0}
     labelcoords {501.0 742.0}
     interface-peer {eth0 n19}
+    services {DefaultRoute UserDefined}
 }
 
 node n39 {
@@ -652,7 +654,7 @@ node n41 {
 	hostname n41
 	!
 	interface eth0
-	 ip address 10.0.12.2/24
+	 ip address 10.3.32.4/24
 	!
     }
     canvas c1
@@ -660,6 +662,19 @@ node n41 {
     labelcoords {403.0 728.0}
     interface-peer {eth0 n14}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+}
+
+node n21 {
+    type router
+    model router
+    network-config {
+	hostname n21
+	!
+    }
+    canvas c1
+    iconcoords {844.6666666666666 617.0}
+    labelcoords {844.6666666666666 649.0}
+    custom-image /usr/local/share/core/icons/normal/antenna.gif
 }
 
 link l1 {
@@ -792,6 +807,11 @@ link l13 {
     bandwidth 0
 }
 
+link l27 {
+    nodes {n18 n28}
+    bandwidth 0
+}
+
 annotation a1 {
     iconcoords {165.0 111.0 285.0 188.0}
     type rectangle
@@ -908,7 +928,7 @@ annotation a11 {
 }
 
 annotation a12 {
-    iconcoords {410.0 574.0}
+    iconcoords {427.0 548.0}
     type text
     label {SW2}
     labelcolor black
@@ -944,6 +964,140 @@ annotation a15 {
     iconcoords {470.0 203.0}
     type text
     label {R11}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a16 {
+    iconcoords {67.0 508.0}
+    type text
+    label {R5}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a17 {
+    iconcoords {444.0 591.0}
+    type text
+    label {R7}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a18 {
+    iconcoords {702.0 492.0}
+    type text
+    label {R9}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a19 {
+    iconcoords {304.0 318.0 685.0 462.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {16}
+    color #24cc26
+    width 0
+    border #600000
+    rad 20
+    effects {bold}
+    canvas c1
+}
+
+annotation a20 {
+    iconcoords {12.0 499.0 297.0 733.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #6b89ff
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a21 {
+    iconcoords {313.0 581.0 552.0 738.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #c0c036
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a22 {
+    iconcoords {597.0 479.0 944.0 738.0}
+    type rectangle
+    label {}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    color #c056ff
+    width 0
+    border black
+    rad 25
+    canvas c1
+}
+
+annotation a23 {
+    iconcoords {183.0 508.0}
+    type text
+    label {Biblioteca}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a24 {
+    iconcoords {478.0 609.0}
+    type text
+    label {Comedor}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a25 {
+    iconcoords {798.0 505.0}
+    type text
+    label {Aulas Comunes 1}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a26 {
+    iconcoords {605.0 392.0}
+    type text
+    label {Datacenter}
     labelcolor black
     fontfamily {Arial}
     fontsize {12}
