@@ -5,16 +5,13 @@ node n1 {
 	hostname n1
 	!
 	interface eth2
-	 ip address 10.0.3.1/24
-	 ipv6 address 2001:3::1/64
+	 ip address 201.0.2.1/24
 	!
 	interface eth1
-	 ip address 10.0.2.1/24
-	 ipv6 address 2001:2::1/64
+	 ip address 201.0.1.1/24
 	!
 	interface eth0
-	 ip address 10.0.0.1/24
-	 ipv6 address 2001:0::1/64
+	 ip address 201.0.0.1/24
 	!
     }
     canvas c1
@@ -23,6 +20,7 @@ node n1 {
     interface-peer {eth0 n2}
     interface-peer {eth1 n5}
     interface-peer {eth2 n6}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n2 {
@@ -32,19 +30,19 @@ node n2 {
 	hostname n2
 	!
 	interface eth1
-	 ip address 10.0.1.1/32
-	 ipv6 address 2001:1::1/128
+	 ip address 192.168.10.1/24
+	 ipv6 address 2001:0::1/
 	!
 	interface eth0
-	 ip address 10.0.0.2/24
-	 ipv6 address 2001:0::2/64
+	 ip address 201.0.0.2/24
 	!
     }
     canvas c1
-    iconcoords {513.0 133.0}
-    labelcoords {513.0 165.0}
+    iconcoords {512.0 133.0}
+    labelcoords {512.0 165.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n4}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n3 {
@@ -54,14 +52,15 @@ node n3 {
 	hostname n3
 	!
 	interface eth0
-	 ip address 10.0.1.20/32
-	 ipv6 address 2001:1::20/128
+	 ip address 192.168.10.2/24
+	 ipv6 address 2001:0::20/
 	!
     }
     canvas c1
-    iconcoords {735.0 132.0}
-    labelcoords {735.0 164.0}
+    iconcoords {749.0 131.0}
+    labelcoords {749.0 163.0}
     interface-peer {eth0 n4}
+    services {DefaultRoute UserDefined}
 }
 
 node n4 {
@@ -82,7 +81,7 @@ node n4 {
 	custom-config-id basic_range
 	custom-command {3 3 9 9 9}
 	config {
-	range=275
+	range=330.88235294117646
 	bandwidth=54000000
 	jitter=0
 	delay=20000
@@ -90,8 +89,8 @@ node n4 {
 	}
     }
     canvas c1
-    iconcoords {602.0 133.0}
-    labelcoords {602.0 165.0}
+    iconcoords {617.0 109.0}
+    labelcoords {617.0 141.0}
     interface-peer {e0 n2}
     interface-peer {e1 n3}
 }
@@ -103,19 +102,18 @@ node n5 {
 	hostname n5
 	!
 	interface eth1
-	 ip address 10.0.4.1/24
-	 ipv6 address 2001:4::1/64
+	 ip address 10.3.10.129/26
 	!
 	interface eth0
-	 ip address 10.0.2.2/24
-	 ipv6 address 2001:2::2/64
+	 ip address 201.0.1.2/24
 	!
     }
     canvas c1
-    iconcoords {165.0 210.0}
-    labelcoords {165.0 242.0}
+    iconcoords {154.0 239.0}
+    labelcoords {154.0 271.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n7}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n6 {
@@ -125,19 +123,18 @@ node n6 {
 	hostname n6
 	!
 	interface eth1
-	 ip address 10.0.5.1/24
-	 ipv6 address 2001:5::1/64
+	 ip address 10.3.0.1/23
 	!
 	interface eth0
-	 ip address 10.0.3.2/24
-	 ipv6 address 2001:3::2/64
+	 ip address 201.0.2.2/24
 	!
     }
     canvas c1
-    iconcoords {317.0 215.0}
-    labelcoords {317.0 247.0}
+    iconcoords {323.0 219.0}
+    labelcoords {323.0 251.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n9}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n7 {
@@ -147,24 +144,22 @@ node n7 {
 	hostname n7
 	!
 	interface eth2
-	 ip address 10.0.5.2/24
-	 ipv6 address 2001:5::2/64
+	 ip address 10.3.0.2/23
 	!
 	interface eth1
-	 ip address 10.0.6.1/24
-	 ipv6 address 2001:6::1/64
+	 ip address 10.3.8.1/25
 	!
 	interface eth0
-	 ip address 10.0.4.2/24
-	 ipv6 address 2001:4::2/64
+	 ip address 10.3.10.130/26
 	!
     }
     canvas c1
-    iconcoords {321.0 342.0}
-    labelcoords {321.0 374.0}
+    iconcoords {329.0 336.0}
+    labelcoords {329.0 368.0}
     interface-peer {eth0 n5}
     interface-peer {eth1 n8}
     interface-peer {eth2 n9}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n8 {
@@ -204,14 +199,14 @@ node n10 {
 	hostname n10
 	!
 	interface eth0
-	 ip address 10.0.5.10/24
-	 ipv6 address 2001:5::10/64
+	 ip address 10.3.0.3/23
 	!
     }
     canvas c1
     iconcoords {616.0 234.0}
     labelcoords {616.0 266.0}
     interface-peer {eth0 n9}
+    services {DefaultRoute UserDefined}
 }
 
 node n11 {
@@ -221,14 +216,14 @@ node n11 {
 	hostname n11
 	!
 	interface eth0
-	 ip address 10.0.5.11/24
-	 ipv6 address 2001:5::11/64
+	 ip address 10.3.0.4/23
 	!
     }
     canvas c1
     iconcoords {615.0 314.0}
     labelcoords {615.0 346.0}
     interface-peer {eth0 n9}
+    services {DefaultRoute UserDefined}
 }
 
 node n12 {
@@ -238,20 +233,16 @@ node n12 {
 	hostname n12
 	!
 	interface eth3
-	 ip address 10.0.13.1/24
-	 ipv6 address 2001:13::1/64
+	 ip address 10.3.2.3/23
 	!
 	interface eth2
-	 ip address 10.0.8.1/24
-	 ipv6 address 2001:8::1/64
+	 ip address 10.3.2.2/23
 	!
 	interface eth1
-	 ip address 10.0.7.1/24
-	 ipv6 address 2001:7::1/64
+	 ip address 10.3.2.1/23
 	!
 	interface eth0
-	 ip address 10.0.6.2/24
-	 ipv6 address 2001:6::2/64
+	 ip address 10.3.8.2/25
 	!
     }
     canvas c1
@@ -261,6 +252,7 @@ node n12 {
     interface-peer {eth1 n16}
     interface-peer {eth2 n17}
     interface-peer {eth3 n28}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n13 {
@@ -269,17 +261,17 @@ node n13 {
     network-config {
 	hostname n13
 	!
+	interface eth3
+	 ip address 10.3.6.3/24
+	!
 	interface eth2
-	 ip address 10.0.10.1/24
-	 ipv6 address 2001:10::1/64
+	 ip address 10.3.6.2/24
 	!
 	interface eth1
-	 ip address 10.0.9.1/24
-	 ipv6 address 2001:9::1/64
+	 ip address 10.3.6.1/24
 	!
 	interface eth0
-	 ip address 10.0.6.3/24
-	 ipv6 address 2001:6::3/64
+	 ip address 10.3.8.3/25
 	!
     }
     canvas c1
@@ -288,6 +280,8 @@ node n13 {
     interface-peer {eth0 n8}
     interface-peer {eth1 n18}
     interface-peer {eth2 n19}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    interface-peer {eth3 n34}
 }
 
 node n14 {
@@ -297,16 +291,13 @@ node n14 {
 	hostname n14
 	!
 	interface eth2
-	 ip address 10.0.16.1/24
-	 ipv6 address 2001:16::1/64
+	 ip address 10.3.4.2/23
 	!
 	interface eth1
-	 ip address 10.0.11.1/24
-	 ipv6 address 2001:11::1/64
+	 ip address 10.3.4.1/23
 	!
 	interface eth0
-	 ip address 10.0.6.4/24
-	 ipv6 address 2001:6::4/64
+	 ip address 10.3.8.4/25
 	!
     }
     canvas c1
@@ -315,6 +306,7 @@ node n14 {
     interface-peer {eth0 n8}
     interface-peer {eth1 n20}
     interface-peer {eth2 n15}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n15 {
@@ -324,19 +316,18 @@ node n15 {
 	hostname n15
 	!
 	interface eth1
-	 ip address 10.0.16.2/24
-	 ipv6 address 2001:16::2/64
+	 ip address 10.3.4.4/23
 	!
 	interface eth0
-	 ip address 10.0.12.1/32
-	 ipv6 address 2001:12::1/128
+	 ip address 10.3.4.3/23
 	!
     }
     canvas c1
-    iconcoords {923.0 511.0}
-    labelcoords {923.0 543.0}
+    iconcoords {933.0 502.0}
+    labelcoords {933.0 534.0}
     interface-peer {eth0 n21}
     interface-peer {eth1 n14}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n16 {
@@ -360,8 +351,8 @@ node n17 {
 	!
     }
     canvas c1
-    iconcoords {293.0 478.0}
-    labelcoords {293.0 502.0}
+    iconcoords {297.0 480.0}
+    labelcoords {297.0 504.0}
     interface-peer {e0 n12}
     interface-peer {e1 n27}
 }
@@ -447,14 +438,14 @@ node n22 {
 	hostname n22
 	!
 	interface eth0
-	 ip address 10.0.12.20/32
-	 ipv6 address 2001:12::20/128
+	 ip address 10.3.4.7/23
 	!
     }
     canvas c1
     iconcoords {857.0 616.0}
     labelcoords {857.0 648.0}
     interface-peer {eth0 n21}
+    services {DefaultRoute UserDefined}
 }
 
 node n23 {
@@ -464,14 +455,14 @@ node n23 {
 	hostname n23
 	!
 	interface eth0
-	 ip address 10.0.12.21/32
-	 ipv6 address 2001:12::21/128
+	 ip address 10.3.4.9/23
 	!
     }
     canvas c1
     iconcoords {892.0 699.0}
     labelcoords {892.0 731.0}
     interface-peer {eth0 n21}
+    services {DefaultRoute UserDefined}
 }
 
 node n24 {
@@ -481,14 +472,14 @@ node n24 {
 	hostname n24
 	!
 	interface eth0
-	 ip address 10.0.12.22/32
-	 ipv6 address 2001:12::22/128
+	 ip address 10.3.4.8/23
 	!
     }
     canvas c1
     iconcoords {971.0 647.0}
     labelcoords {971.0 679.0}
     interface-peer {eth0 n21}
+    services {DefaultRoute UserDefined}
 }
 
 node n25 {
@@ -498,14 +489,14 @@ node n25 {
 	hostname n25
 	!
 	interface eth0
-	 ip address 10.0.11.20/24
-	 ipv6 address 2001:11::20/64
+	 ip address 10.3.4.6/23
 	!
     }
     canvas c1
     iconcoords {708.0 616.0}
     labelcoords {708.0 648.0}
     interface-peer {eth0 n20}
+    services {DefaultRoute UserDefined}
 }
 
 node n26 {
@@ -515,14 +506,14 @@ node n26 {
 	hostname n26
 	!
 	interface eth0
-	 ip address 10.0.11.21/24
-	 ipv6 address 2001:11::21/64
+	 ip address 10.3.4.5/23
 	!
     }
     canvas c1
     iconcoords {782.0 550.0}
     labelcoords {782.0 582.0}
     interface-peer {eth0 n20}
+    services {DefaultRoute UserDefined}
 }
 
 node n27 {
@@ -532,14 +523,14 @@ node n27 {
 	hostname n27
 	!
 	interface eth0
-	 ip address 10.0.8.10/24
-	 ipv6 address 2001:8::10/64
+	 ip address 10.3.2.4/23
 	!
     }
     canvas c1
-    iconcoords {291.0 543.0}
-    labelcoords {291.0 575.0}
+    iconcoords {296.0 578.0}
+    labelcoords {296.0 610.0}
     interface-peer {eth0 n17}
+    services {DefaultRoute UserDefined}
 }
 
 node n28 {
@@ -549,12 +540,10 @@ node n28 {
 	hostname n28
 	!
 	interface eth1
-	 ip address 10.0.14.1/32
-	 ipv6 address 2001:14::1/128
+	 ip address 10.3.2.6/23
 	!
 	interface eth0
-	 ip address 10.0.13.2/24
-	 ipv6 address 2001:13::2/64
+	 ip address 10.3.2.5/23
 	!
     }
     canvas c1
@@ -562,6 +551,7 @@ node n28 {
     labelcoords {148.0 558.0}
     interface-peer {eth0 n12}
     interface-peer {eth1 n29}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n29 {
@@ -604,14 +594,14 @@ node n30 {
 	hostname n30
 	!
 	interface eth0
-	 ip address 10.0.14.20/32
-	 ipv6 address 2001:14::20/128
+	 ip address 10.3.3.1/23
 	!
     }
     canvas c1
     iconcoords {131.0 644.0}
     labelcoords {131.0 676.0}
     interface-peer {eth0 n29}
+    services {DefaultRoute UserDefined}
 }
 
 node n31 {
@@ -621,14 +611,14 @@ node n31 {
 	hostname n31
 	!
 	interface eth0
-	 ip address 10.0.14.21/32
-	 ipv6 address 2001:14::21/128
+	 ip address 10.3.3.2/23
 	!
     }
     canvas c1
     iconcoords {249.0 671.0}
     labelcoords {249.0 703.0}
     interface-peer {eth0 n29}
+    services {DefaultRoute UserDefined}
 }
 
 node n32 {
@@ -638,14 +628,14 @@ node n32 {
 	hostname n32
 	!
 	interface eth0
-	 ip address 10.0.7.20/24
-	 ipv6 address 2001:7::20/64
+	 ip address 10.3.2.8/23
 	!
     }
     canvas c1
     iconcoords {20.0 651.0}
     labelcoords {20.0 683.0}
     interface-peer {eth0 n16}
+    services {DefaultRoute UserDefined}
 }
 
 node n33 {
@@ -655,14 +645,14 @@ node n33 {
 	hostname n33
 	!
 	interface eth0
-	 ip address 10.0.7.21/24
-	 ipv6 address 2001:7::21/64
+	 ip address 10.3.2.7/23
 	!
     }
     canvas c1
     iconcoords {63.0 580.0}
     labelcoords {63.0 612.0}
     interface-peer {eth0 n16}
+    services {DefaultRoute UserDefined}
 }
 
 node n34 {
@@ -671,15 +661,19 @@ node n34 {
     network-config {
 	hostname n34
 	!
+	interface eth1
+	 ip address 10.3.6.5/24
+	!
 	interface eth0
-	 ip address 10.0.15.1/32
-	 ipv6 address 2001:15::1/128
+	 ip address 10.3.6.4/24
 	!
     }
     canvas c1
-    iconcoords {527.0 510.0}
-    labelcoords {527.0 542.0}
+    iconcoords {521.0 537.0}
+    labelcoords {521.0 569.0}
     interface-peer {eth0 n35}
+    interface-peer {eth1 n13}
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n35 {
@@ -708,8 +702,8 @@ node n35 {
 	}
     }
     canvas c1
-    iconcoords {522.0 578.0}
-    labelcoords {522.0 610.0}
+    iconcoords {522.0 600.0}
+    labelcoords {522.0 632.0}
     interface-peer {e0 n34}
     interface-peer {e1 n36}
 }
@@ -721,14 +715,14 @@ node n36 {
 	hostname n36
 	!
 	interface eth0
-	 ip address 10.0.15.20/32
-	 ipv6 address 2001:15::20/128
+	 ip address 10.3.6.8/24
 	!
     }
     canvas c1
-    iconcoords {524.0 660.0}
-    labelcoords {524.0 692.0}
+    iconcoords {523.0 663.0}
+    labelcoords {523.0 695.0}
     interface-peer {eth0 n35}
+    services {DefaultRoute UserDefined}
 }
 
 node n37 {
@@ -738,14 +732,14 @@ node n37 {
 	hostname n37
 	!
 	interface eth0
-	 ip address 10.0.10.20/24
-	 ipv6 address 2001:10::20/64
+	 ip address 10.3.6.7/24
 	!
     }
     canvas c1
     iconcoords {639.0 573.0}
     labelcoords {639.0 605.0}
     interface-peer {eth0 n19}
+    services {DefaultRoute UserDefined}
 }
 
 node n38 {
@@ -755,14 +749,14 @@ node n38 {
 	hostname n38
 	!
 	interface eth0
-	 ip address 10.0.9.20/24
-	 ipv6 address 2001:9::20/64
+	 ip address 10.3.6.6/24
 	!
     }
     canvas c1
     iconcoords {386.0 592.0}
     labelcoords {386.0 624.0}
     interface-peer {eth0 n18}
+    services {DefaultRoute UserDefined}
 }
 
 link l1 {
@@ -939,6 +933,11 @@ link l37 {
     bandwidth 0
 }
 
+link l38 {
+    nodes {n13 n34}
+    bandwidth 0
+}
+
 annotation a1 {
     iconcoords {3 191 1000 742}
     type rectangle
@@ -959,7 +958,7 @@ annotation a2 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #a9c0a3
     width 0
     border black
@@ -973,7 +972,7 @@ annotation a3 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #fbc0ff
     width 0
     border black
@@ -987,7 +986,7 @@ annotation a4 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #ffc081
     width 0
     border black
@@ -1001,7 +1000,7 @@ annotation a5 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #6bf188
     width 0
     border black
@@ -1015,7 +1014,7 @@ annotation a6 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #ffff7e
     width 0
     border black
@@ -1029,7 +1028,7 @@ annotation a7 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #2ee6a8
     width 0
     border black
@@ -1043,7 +1042,7 @@ annotation a9 {
     label {IPS}
     labelcolor black
     fontfamily {Arial}
-    fontsize 20
+    fontsize {20}
     effects {bold}
     canvas c1
 }
@@ -1054,7 +1053,7 @@ annotation a8 {
     label {CASA}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1065,7 +1064,7 @@ annotation a10 {
     label {DATACENTER}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1076,7 +1075,7 @@ annotation a11 {
     label {R2}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1087,18 +1086,18 @@ annotation a12 {
     label {R11}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
 
 annotation a13 {
-    iconcoords {130.0 233.0}
+    iconcoords {118.0 262.0}
     type text
     label {R4}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1109,7 +1108,7 @@ annotation a14 {
     label {R3}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1120,7 +1119,7 @@ annotation a15 {
     label {SERVER 1}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1131,7 +1130,7 @@ annotation a16 {
     label {SERVER 2}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1142,7 +1141,7 @@ annotation a17 {
     label {SW2}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1153,7 +1152,7 @@ annotation a18 {
     label {R5}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1164,18 +1163,18 @@ annotation a19 {
     label {R7}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
 
 annotation a20 {
-    iconcoords {910.0 436.0}
+    iconcoords {886.0 433.0}
     type text
     label {R9}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1186,7 +1185,7 @@ annotation a21 {
     label {R10}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1197,7 +1196,7 @@ annotation a22 {
     label {SW1}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1208,7 +1207,7 @@ annotation a23 {
     label {SW3}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1219,18 +1218,18 @@ annotation a24 {
     label {SW4}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
 
 annotation a25 {
-    iconcoords {413.0 512.0}
+    iconcoords {382.0 466.0}
     type text
     label {SW5}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1241,7 +1240,7 @@ annotation a26 {
     label {SW6}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1252,7 +1251,7 @@ annotation a27 {
     label {SW7}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1263,18 +1262,18 @@ annotation a28 {
     label {R6}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
 
 annotation a29 {
-    iconcoords {237.0 584.0}
+    iconcoords {243.0 608.0}
     type text
     label {SERVER A}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1285,7 +1284,7 @@ annotation a30 {
     label {PC5}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1296,7 +1295,7 @@ annotation a31 {
     label {PC1}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1307,7 +1306,7 @@ annotation a32 {
     label {PC2}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1318,7 +1317,7 @@ annotation a33 {
     label {PC3}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1329,7 +1328,7 @@ annotation a34 {
     label {PC4}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1340,7 +1339,7 @@ annotation a35 {
     label {PC6}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1351,7 +1350,7 @@ annotation a36 {
     label {PC7}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1362,7 +1361,7 @@ annotation a37 {
     label {PC8}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1373,7 +1372,7 @@ annotation a38 {
     label {PC9}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1384,7 +1383,7 @@ annotation a39 {
     label {PC10}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1395,7 +1394,7 @@ annotation a40 {
     label {PC11}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1406,7 +1405,7 @@ annotation a41 {
     label {PC12}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1417,7 +1416,7 @@ annotation a42 {
     label {R1}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1428,7 +1427,7 @@ annotation a43 {
     label {CAMPUS UNIVERSITARIO}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1439,7 +1438,7 @@ annotation a44 {
     label {BIBLIOTECA}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1450,7 +1449,7 @@ annotation a45 {
     label {COMEDOR}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1461,7 +1460,7 @@ annotation a46 {
     label {COMUNES 1}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     effects {bold}
     canvas c1
 }
@@ -1471,7 +1470,7 @@ canvas c1 {
 }
 
 option global {
-    interface_names no
+    interface_names yes
     ip_addresses yes
     ipv6_addresses no
     node_labels no
