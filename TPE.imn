@@ -15,12 +15,19 @@ node n1 {
 	!
     }
     canvas c1
-    iconcoords {129.0 134.0}
-    labelcoords {129.0 166.0}
+    iconcoords {137.33333333333337 124.66666666666666}
+    labelcoords {137.33333333333337 156.66666666666666}
     interface-peer {eth0 n2}
     interface-peer {eth1 n5}
     interface-peer {eth2 n6}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 201.0.0.1/24 dev eth0', 'ip addr add 201.0.1.1/24 dev eth1', 'ip addr add 201.0.2.1/24 dev eth2', 'ip route add 10.3.0.0/23 via 201.0.2.2 dev eth2', 'ip route add 10.3.0.0/23 via 201.0.1.2 dev eth1', 'ip route add 192.168.10.0/24 via 201.0.0.2 dev eth0', 'ip route add 201.0.0.0/24 dev eth0', )
+	}
+    }
 }
 
 node n2 {
@@ -31,18 +38,24 @@ node n2 {
 	!
 	interface eth1
 	 ip address 192.168.10.1/24
-	 ipv6 address 2001:0::1/
 	!
 	interface eth0
 	 ip address 201.0.0.2/24
 	!
     }
     canvas c1
-    iconcoords {512.0 133.0}
-    labelcoords {512.0 165.0}
+    iconcoords {518.0 127.0}
+    labelcoords {518.0 159.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n4}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 201.0.0.2/24 dev eth0', 'ip addr add 192.168.10.1/24 dev eth1', 'iptables -t nat -A POSTROUTING -s 192.168.10.2 -o eth0 -j MASQUERADE', 'iptables -t nat -A PREROUTING -d 201.0.0.2 -j DNAT --to-destination 192.168.10.2', 'ip route add default via 201.0.0.1 dev eth0', )
+	}
+    }
 }
 
 node n3 {
@@ -53,14 +66,20 @@ node n3 {
 	!
 	interface eth0
 	 ip address 192.168.10.2/24
-	 ipv6 address 2001:0::20/
 	!
     }
     canvas c1
-    iconcoords {749.0 131.0}
-    labelcoords {749.0 163.0}
+    iconcoords {749.0 130.0}
+    labelcoords {749.0 162.0}
     interface-peer {eth0 n4}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 192.168.10.2/24 dev eth0', )
+	}
+    }
 }
 
 node n4 {
@@ -89,8 +108,8 @@ node n4 {
 	}
     }
     canvas c1
-    iconcoords {617.0 109.0}
-    labelcoords {617.0 141.0}
+    iconcoords {626.0 94.0}
+    labelcoords {626.0 126.0}
     interface-peer {e0 n2}
     interface-peer {e1 n3}
 }
@@ -102,18 +121,25 @@ node n5 {
 	hostname n5
 	!
 	interface eth1
-	 ip address 10.3.10.129/26
+	 ip address 10.3.7.129/30
 	!
 	interface eth0
 	 ip address 201.0.1.2/24
 	!
     }
     canvas c1
-    iconcoords {154.0 239.0}
-    labelcoords {154.0 271.0}
+    iconcoords {154.0 237.0}
+    labelcoords {154.0 269.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n7}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 201.0.1.2/24 dev eth0', 'ip addr add 10.3.7.129/30 dev eth1', 'ip route add 10.3.0.0/21 via 10.3.7.130 dev eth1', 'iptables -t nat -A POSTROUTING -o eth0 -s 10.3.2.0/23 -j MASQUERADE', 'iptables -t nat -A POSTROUTING -o eth0 -s 10.3.4.0/23 -j MASQUERADE', 'iptables -t filter -A FORWARD -o eth0 -s 10.3.6.0/24 -j REJECT', 'iptables -t filter -A FORWARD -o eth0 -s 10.3.0.0/23 -j DROP', 'ip route add default via 201.0.1.1 dev eth0', )
+	}
+    }
 }
 
 node n6 {
@@ -130,11 +156,18 @@ node n6 {
 	!
     }
     canvas c1
-    iconcoords {323.0 219.0}
-    labelcoords {323.0 251.0}
+    iconcoords {324.0 215.0}
+    labelcoords {324.0 247.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n9}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 201.0.2.2/24 dev eth0', 'ip addr add 10.3.0.1/23 dev eth1', 'ip route add 10.3.2.0/21 via 10.3.0.2 dev eth1', 'ip route add 192.168.10.0/24 via 201.0.2.1 dev eth 0', 'ip route add default via 201.0.2.1 dev eth0', 'iptables -t nat -A POSTROUTING -s 10.3.0.0/21 -o eth0 -j MASQUERADE', 'iptables -t filter -A FORWARD -s 10.3.6.0/24 -o eth0 -j DROP', 'iptables -t nat -A PREROUTING -d 201.0.2.2 -p udp --dport 80 -j DNAT --to-destination 10.3.0.3:8080', )
+	}
+    }
 }
 
 node n7 {
@@ -143,23 +176,30 @@ node n7 {
     network-config {
 	hostname n7
 	!
+	interface eth1
+	 ip address 10.3.7.1/25
+	!
+	interface eth0
+	 ip address 10.3.7.130/30
+	!
 	interface eth2
 	 ip address 10.3.0.2/23
 	!
-	interface eth1
-	 ip address 10.3.8.1/25
-	!
-	interface eth0
-	 ip address 10.3.10.130/26
-	!
     }
     canvas c1
-    iconcoords {329.0 336.0}
-    labelcoords {329.0 368.0}
+    iconcoords {328.0 334.0}
+    labelcoords {328.0 366.0}
     interface-peer {eth0 n5}
     interface-peer {eth1 n8}
     interface-peer {eth2 n9}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.7.130/30 dev eth0', 'ip addr add 10.3.7.1/25 dev eth1', 'ip addr add 10.3.0.2/23 dev eth2', 'ip route add 10.3.2.0/23 via 10.3.7.2 dev eth1', 'ip route add 10.3.4.0/23 via 10.3.7.4 dev eth1', 'ip route add 10.3.6.0/24 via 10.3.7.3 dev eth1', 'ip route add default via 10.3.7.129 dev eth0', 'ip route add 201.0.0.0/24 via 10.3.0.1 dev eth2', 'ip route add 192.168.10.0/24 via 10.3.0.1 dev eth2', 'iptables -t nat -A PREROUTING --dport 80 -p udp -j DNAT --to-destination 10.3.0.3:8080', 'iptables -t filter -A FORWARD -o eth2 -s 10.3.6.0/24 -j REJECT', )
+	}
+    }
 }
 
 node n8 {
@@ -188,8 +228,8 @@ node n9 {
     labelcoords {420.0 300.0}
     interface-peer {e0 n6}
     interface-peer {e1 n10}
-    interface-peer {e2 n11}
     interface-peer {e3 n7}
+    interface-peer {e2 n11}
 }
 
 node n10 {
@@ -203,27 +243,17 @@ node n10 {
 	!
     }
     canvas c1
-    iconcoords {616.0 234.0}
-    labelcoords {616.0 266.0}
+    iconcoords {590.0 219.0}
+    labelcoords {590.0 251.0}
     interface-peer {eth0 n9}
     services {DefaultRoute UserDefined}
-}
-
-node n11 {
-    type router
-    model host
-    network-config {
-	hostname n11
-	!
-	interface eth0
-	 ip address 10.3.0.4/23
-	!
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.0.3/23 dev eth0', )
+	}
     }
-    canvas c1
-    iconcoords {615.0 314.0}
-    labelcoords {615.0 346.0}
-    interface-peer {eth0 n9}
-    services {DefaultRoute UserDefined}
 }
 
 node n12 {
@@ -233,26 +263,33 @@ node n12 {
 	hostname n12
 	!
 	interface eth3
-	 ip address 10.3.2.3/23
+	 ip address 10.3.3.65/30
 	!
 	interface eth2
-	 ip address 10.3.2.2/23
+	 ip address 10.3.3.1/27
 	!
 	interface eth1
-	 ip address 10.3.2.1/23
+	 ip address 10.3.3.33/27
 	!
 	interface eth0
-	 ip address 10.3.8.2/25
+	 ip address 10.3.7.2/25
 	!
     }
     canvas c1
-    iconcoords {143.0 437.0}
-    labelcoords {143.0 469.0}
+    iconcoords {134.0 437.0}
+    labelcoords {134.0 469.0}
     interface-peer {eth0 n8}
     interface-peer {eth1 n16}
     interface-peer {eth2 n17}
     interface-peer {eth3 n28}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.3.65/30 dev eth3', 'ip addr add 10.3.3.33/27 dev eth1', 'ip addr add 10.3.7.2/25 dev eth0', 'ip addr add 10.3.3.1/27 dev eth2', 'ip route add 10.3.2.0/25 via 10.3.3.66 dev eth3', 'ip route add default via 10.3.7.1 dev eth0', 'ip route add 10.3.6.0/24 via 10.3.7.3 dev eth0', 'ip route add 10.3.4.0/23 via 10.3.7.4 dev eth0', )
+	}
+    }
 }
 
 node n13 {
@@ -262,16 +299,16 @@ node n13 {
 	hostname n13
 	!
 	interface eth3
-	 ip address 10.3.6.3/24
+	 ip address 10.3.6.209/30
 	!
 	interface eth2
-	 ip address 10.3.6.2/24
+	 ip address 10.3.6.129/26
 	!
 	interface eth1
-	 ip address 10.3.6.1/24
+	 ip address 10.3.6.193/28
 	!
 	interface eth0
-	 ip address 10.3.8.3/25
+	 ip address 10.3.7.3/25
 	!
     }
     canvas c1
@@ -282,6 +319,13 @@ node n13 {
     interface-peer {eth2 n19}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
     interface-peer {eth3 n34}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.6.193/28 dev eth1', 'ip addr add 10.3.6.129/26 dev eth2', 'ip addr add 10.3.6.209/30 dev eth3', 'ip addr add 10.3.7.3/25 dev eth0', 'ip route add 10.3.6.0/25 via 10.3.6.210 dev eth3', 'ip route add 10.3.4.0/23 via 10.3.7.4 dev eth0', 'ip route add 10.3.2.0/23 via 10.3.7.2 dev eth0', 'ip route add default via 10.3.7.1 dev eth0', )
+	}
+    }
 }
 
 node n14 {
@@ -291,22 +335,29 @@ node n14 {
 	hostname n14
 	!
 	interface eth2
-	 ip address 10.3.4.2/23
+	 ip address 10.3.5.193/30
 	!
 	interface eth1
-	 ip address 10.3.4.1/23
+	 ip address 10.3.5.129/26
 	!
 	interface eth0
-	 ip address 10.3.8.4/25
+	 ip address 10.3.7.4/25
 	!
     }
     canvas c1
-    iconcoords {856.0 437.0}
-    labelcoords {856.0 469.0}
+    iconcoords {846.0 435.0}
+    labelcoords {846.0 467.0}
     interface-peer {eth0 n8}
     interface-peer {eth1 n20}
     interface-peer {eth2 n15}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.5.193/30 dev eth2', 'ip addr add 10.3.7.4/25 dev eth0', 'ip addr add 10.3.5.129/26 dev eth1', 'ip route add 10.3.4.0/25 via 10.3.5.194 dev eth2', 'ip route add default via 10.3.7.1 dev eth0', 'ip route add 10.3.6.0/24 via 10.3.7.3 dev eth0', 'ip route add 10.3.2.0/23 via 10.3.7.2 dev eth0', )
+	}
+    }
 }
 
 node n15 {
@@ -316,18 +367,25 @@ node n15 {
 	hostname n15
 	!
 	interface eth1
-	 ip address 10.3.4.4/23
+	 ip address 10.3.5.194/30
 	!
 	interface eth0
-	 ip address 10.3.4.3/23
+	 ip address 10.3.4.1/25
 	!
     }
     canvas c1
-    iconcoords {933.0 502.0}
-    labelcoords {933.0 534.0}
+    iconcoords {927.0 506.0}
+    labelcoords {927.0 538.0}
     interface-peer {eth0 n21}
     interface-peer {eth1 n14}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.5.194/30 dev eth1', 'ip addr add 10.3.4.1/25 dev eth0', 'ip route add default via 10.3.5.193 dev eth1', )
+	}
+    }
 }
 
 node n16 {
@@ -438,7 +496,7 @@ node n22 {
 	hostname n22
 	!
 	interface eth0
-	 ip address 10.3.4.7/23
+	 ip address 10.3.4.2/25
 	!
     }
     canvas c1
@@ -446,6 +504,13 @@ node n22 {
     labelcoords {857.0 648.0}
     interface-peer {eth0 n21}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.4.2/25 dev eth0', )
+	}
+    }
 }
 
 node n23 {
@@ -455,7 +520,7 @@ node n23 {
 	hostname n23
 	!
 	interface eth0
-	 ip address 10.3.4.9/23
+	 ip address 10.3.4.3/25
 	!
     }
     canvas c1
@@ -463,6 +528,13 @@ node n23 {
     labelcoords {892.0 731.0}
     interface-peer {eth0 n21}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.4.3/25 dev eth0', )
+	}
+    }
 }
 
 node n24 {
@@ -472,7 +544,7 @@ node n24 {
 	hostname n24
 	!
 	interface eth0
-	 ip address 10.3.4.8/23
+	 ip address 10.3.4.4/25
 	!
     }
     canvas c1
@@ -480,6 +552,13 @@ node n24 {
     labelcoords {971.0 679.0}
     interface-peer {eth0 n21}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.4.4/25 dev eth0', )
+	}
+    }
 }
 
 node n25 {
@@ -489,7 +568,7 @@ node n25 {
 	hostname n25
 	!
 	interface eth0
-	 ip address 10.3.4.6/23
+	 ip address 10.3.5.131/26
 	!
     }
     canvas c1
@@ -497,6 +576,13 @@ node n25 {
     labelcoords {708.0 648.0}
     interface-peer {eth0 n20}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.5.131/26 dev eth0', )
+	}
+    }
 }
 
 node n26 {
@@ -506,14 +592,21 @@ node n26 {
 	hostname n26
 	!
 	interface eth0
-	 ip address 10.3.4.5/23
+	 ip address 10.3.5.130/26
 	!
     }
     canvas c1
-    iconcoords {782.0 550.0}
-    labelcoords {782.0 582.0}
+    iconcoords {778.0 550.0}
+    labelcoords {778.0 582.0}
     interface-peer {eth0 n20}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.5.130/26 dev eth0', )
+	}
+    }
 }
 
 node n27 {
@@ -523,7 +616,7 @@ node n27 {
 	hostname n27
 	!
 	interface eth0
-	 ip address 10.3.2.4/23
+	 ip address 10.3.3.2/27
 	!
     }
     canvas c1
@@ -531,6 +624,13 @@ node n27 {
     labelcoords {296.0 610.0}
     interface-peer {eth0 n17}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.3.2/27 dev eth0', )
+	}
+    }
 }
 
 node n28 {
@@ -539,19 +639,26 @@ node n28 {
     network-config {
 	hostname n28
 	!
-	interface eth1
-	 ip address 10.3.2.6/23
-	!
 	interface eth0
-	 ip address 10.3.2.5/23
+	 ip address 10.3.3.66/30
+	!
+	interface eth1
+	 ip address 10.3.2.1/25
 	!
     }
     canvas c1
-    iconcoords {148.0 526.0}
-    labelcoords {148.0 558.0}
+    iconcoords {148.0 533.0}
+    labelcoords {148.0 565.0}
     interface-peer {eth0 n12}
     interface-peer {eth1 n29}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.3.66/30 dev eth0', 'ip addr add 10.3.2.1/25 dev eth1', 'ip route add default via 10.3.3.65 dev eth0', )
+	}
+    }
 }
 
 node n29 {
@@ -594,14 +701,21 @@ node n30 {
 	hostname n30
 	!
 	interface eth0
-	 ip address 10.3.3.1/23
+	 ip address 10.3.2.2/25
 	!
     }
     canvas c1
-    iconcoords {131.0 644.0}
-    labelcoords {131.0 676.0}
+    iconcoords {105.33333333333334 649.0}
+    labelcoords {105.33333333333334 681.0}
     interface-peer {eth0 n29}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.2.2/25 dev eth0', )
+	}
+    }
 }
 
 node n31 {
@@ -611,7 +725,7 @@ node n31 {
 	hostname n31
 	!
 	interface eth0
-	 ip address 10.3.3.2/23
+	 ip address 10.3.2.3/25
 	!
     }
     canvas c1
@@ -619,6 +733,13 @@ node n31 {
     labelcoords {249.0 703.0}
     interface-peer {eth0 n29}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.2.3/25 dev eth0', )
+	}
+    }
 }
 
 node n32 {
@@ -628,7 +749,7 @@ node n32 {
 	hostname n32
 	!
 	interface eth0
-	 ip address 10.3.2.8/23
+	 ip address 10.3.3.35/27
 	!
     }
     canvas c1
@@ -636,6 +757,13 @@ node n32 {
     labelcoords {20.0 683.0}
     interface-peer {eth0 n16}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.3.35/27 dev eth0', )
+	}
+    }
 }
 
 node n33 {
@@ -645,14 +773,21 @@ node n33 {
 	hostname n33
 	!
 	interface eth0
-	 ip address 10.3.2.7/23
+	 ip address 10.3.3.34/27
 	!
     }
     canvas c1
-    iconcoords {63.0 580.0}
-    labelcoords {63.0 612.0}
+    iconcoords {72.0 580.0}
+    labelcoords {72.0 612.0}
     interface-peer {eth0 n16}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.3.34/27 dev eth0', )
+	}
+    }
 }
 
 node n34 {
@@ -662,10 +797,10 @@ node n34 {
 	hostname n34
 	!
 	interface eth1
-	 ip address 10.3.6.5/24
+	 ip address 10.3.6.210/30
 	!
 	interface eth0
-	 ip address 10.3.6.4/24
+	 ip address 10.3.6.1/25
 	!
     }
     canvas c1
@@ -674,6 +809,13 @@ node n34 {
     interface-peer {eth0 n35}
     interface-peer {eth1 n13}
     services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.6.1/25 dev eth0', 'ip addr add 10.3.6.210/30 dev eth1', 'ip route add default via 10.3.6.209 dev eth1', )
+	}
+    }
 }
 
 node n35 {
@@ -715,7 +857,7 @@ node n36 {
 	hostname n36
 	!
 	interface eth0
-	 ip address 10.3.6.8/24
+	 ip address 10.3.6.2/25
 	!
     }
     canvas c1
@@ -723,6 +865,13 @@ node n36 {
     labelcoords {523.0 695.0}
     interface-peer {eth0 n35}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.6.2/25 dev eth0', )
+	}
+    }
 }
 
 node n37 {
@@ -732,7 +881,7 @@ node n37 {
 	hostname n37
 	!
 	interface eth0
-	 ip address 10.3.6.7/24
+	 ip address 10.3.6.130/26
 	!
     }
     canvas c1
@@ -740,6 +889,13 @@ node n37 {
     labelcoords {639.0 605.0}
     interface-peer {eth0 n19}
     services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.6.130/26 dev eth0', )
+	}
+    }
 }
 
 node n38 {
@@ -749,13 +905,44 @@ node n38 {
 	hostname n38
 	!
 	interface eth0
-	 ip address 10.3.6.6/24
+	 ip address 10.3.6.194/28
 	!
     }
     canvas c1
     iconcoords {386.0 592.0}
     labelcoords {386.0 624.0}
     interface-peer {eth0 n18}
+    services {DefaultRoute UserDefined}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.6.194/28 dev eth0', )
+	}
+    }
+}
+
+node n11 {
+    type router
+    model host
+    network-config {
+	hostname n11
+	!
+	interface eth0
+	 ip address 10.3.0.10/23
+	!
+    }
+    canvas c1
+    iconcoords {614.0 316.0}
+    labelcoords {614.0 348.0}
+    interface-peer {eth0 n9}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ip addr add 10.3.0.10/23 dev eth0', )
+	}
+    }
     services {DefaultRoute UserDefined}
 }
 
@@ -794,11 +981,6 @@ link l7 {
 
 link l8 {
     nodes {n9 n10}
-    bandwidth 0
-}
-
-link l9 {
-    nodes {n9 n11}
     bandwidth 0
 }
 
@@ -938,6 +1120,11 @@ link l38 {
     bandwidth 0
 }
 
+link l9 {
+    nodes {n9 n11}
+    bandwidth 0
+}
+
 annotation a1 {
     iconcoords {3 191 1000 742}
     type rectangle
@@ -1039,7 +1226,7 @@ annotation a7 {
 annotation a9 {
     iconcoords {113.0 78.0}
     type text
-    label {IPS}
+    label {ISP}
     labelcolor black
     fontfamily {Arial}
     fontsize {20}
@@ -1103,7 +1290,7 @@ annotation a13 {
 }
 
 annotation a14 {
-    iconcoords {278.0 364.0}
+    iconcoords {278.0 351.0}
     type text
     label {R3}
     labelcolor black
@@ -1136,7 +1323,7 @@ annotation a16 {
 }
 
 annotation a17 {
-    iconcoords {576.0 389.0}
+    iconcoords {543.0 387.0}
     type text
     label {SW2}
     labelcolor black
@@ -1147,7 +1334,7 @@ annotation a17 {
 }
 
 annotation a18 {
-    iconcoords {83.0 436.0}
+    iconcoords {91.0 418.0}
     type text
     label {R5}
     labelcolor black
@@ -1158,7 +1345,7 @@ annotation a18 {
 }
 
 annotation a19 {
-    iconcoords {478.0 439.0}
+    iconcoords {481.0 426.0}
     type text
     label {R7}
     labelcolor black
@@ -1422,7 +1609,7 @@ annotation a42 {
 }
 
 annotation a43 {
-    iconcoords {11.0 336.0}
+    iconcoords {10.0 336.0}
     type text
     label {CAMPUS UNIVERSITARIO}
     labelcolor black
@@ -1458,6 +1645,17 @@ annotation a46 {
     iconcoords {701.0 697.0}
     type text
     label {COMUNES 1}
+    labelcolor black
+    fontfamily {Arial}
+    fontsize {12}
+    effects {bold}
+    canvas c1
+}
+
+annotation a47 {
+    iconcoords {467.0 533.0}
+    type text
+    label {R8}
     labelcolor black
     fontfamily {Arial}
     fontsize {12}
