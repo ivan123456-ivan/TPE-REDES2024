@@ -165,7 +165,7 @@ node n6 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ip addr add 201.0.2.2/24 dev eth0', 'ip addr add 10.3.0.1/23 dev eth1', 'ip route add 10.3.2.0/21 via 10.3.0.2 dev eth1', 'ip route add default via 201.0.2.1 dev eth0', 'iptables -t nat -A PREROUTING -d 201.0.2.2 -p udp --dport 80 -j DNAT --to-destination 10.3.0.3:8080', 'iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE', 'iptables -t filter -A FORWARD -d 201.0.0.2 -j ACCEPT', 'iptables -t filter -A FORWARD -s 10.3.0.0/23 -j ACCEPT', 'iptables -t filter -A FORWARD -i eth1 -j REJECT', )
+	cmdup=('ip addr add 201.0.2.2/24 dev eth0', 'ip addr add 10.3.0.1/23 dev eth1', 'ip route add default via 201.0.2.1 dev eth0', 'iptables -t nat -A PREROUTING -d 201.0.2.2 -p udp --dport 80 -j DNAT --to-destination 10.3.0.3:8080', 'iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE', 'iptables -t filter -A FORWARD -d 201.0.0.2 -j ACCEPT', 'iptables -t filter -A FORWARD -s 10.3.0.0/23 -j ACCEPT', 'iptables -t filter -A FORWARD -i eth1 -j REJECT', 'ip route add 10.3.0.0/21 via 10.3.0.2 dev eth1', )
 	}
     }
 }
